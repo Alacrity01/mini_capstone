@@ -1,0 +1,5 @@
+product = Product.new(name: "Two person dialogue", price: 40, image_url: "https://929voice.fm/wp-content/uploads/sites/293/2018/06/making-friends-2.jpg", description: "Chat with Jeff and his undivided attention for up to 60 minutes!")
+
+product = Product.new(name: "Calm monologue (stream of consciousness", price: 60, image_url: "https://www.nj.com/resizer/GHsPqiUEVylWb5hdwAuWmy_fVx0=/600x0/arc-anglerfish-arc2-prod-advancelocal.s3.amazonaws.com/public/FDK2U247NBGI5H3TZZBTYFOFHY.jpg", description: "Listen to Jeff's thoughts, by yourself or in a group, for up to 60 minutes!")
+
+product = Product.new(name: "Heated monologue (rant)", price: 80, image_url: "https://cdn.cnn.com/cnnnext/dam/assets/170324142844-john-lewis-health-care-bill-speech-sot-00001310.jpg", description: "Observe as Jeff rants about a subject he feels passionately about; bring a friend!")
