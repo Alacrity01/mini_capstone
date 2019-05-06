@@ -3,5 +3,6 @@ Rails.application.routes.draw do
     get '/products_controller' => 'products#index'
     post '/products_controller' => 'products#create'
     get '/products_controller/:id' => 'products#show'
+    patch '/products_controller/:id' => 'products#update'
   end
 end
