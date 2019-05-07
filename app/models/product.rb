@@ -1,10 +1,6 @@
 class Product < ApplicationRecord
   def is_discounted?
-    if price < 10
-      return true
-    else
-      false
-    end
+    price < 60
   end
 
   def tax
