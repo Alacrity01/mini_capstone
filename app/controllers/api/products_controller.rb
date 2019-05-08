@@ -12,8 +12,11 @@ class Api::ProductsController < ApplicationController
                           description: params[:description],
                           in_stock: params[:in_stock]
                           )
-    @product.save
-    render 'show.json.jbuilder'
+    if @product.save
+      render 'show.json.jbuilder'
+    else
+      render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -30,8 +33,12 @@ class Api::ProductsController < ApplicationController
     @product.description = params[:description] || @product.description
     @product.in_stock = params[:in_stock] || @product.in_stock
 
-    @product.save
-    render 'show.json.jbuilder'
+
+    if @product.save
+      render 'show.json.jbuilder'
+    else
+      render json: { message: @product.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def destroy
