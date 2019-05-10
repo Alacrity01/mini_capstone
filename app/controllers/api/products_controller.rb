@@ -7,10 +7,18 @@ class Api::ProductsController < ApplicationController
       @products = @products.where("name iLIKE ?", "%#{search_term}%")
     end
 
-    discounted = params[:discount]
-    if discounted
-      @products = @products.where("price = ?", "")
+    discount = params[:discount]
+    if discount == "true"
+      @products = @products.where("price < ?", 60)
     end
+    
+    sort_attribute = params[:sort]
+    sort_order = params[:sort_order]
+
+    if sort_attribute == "price"
+      @products = @products.order(:price)
+    end
+
 
     render 'index.json.jbuilder'
   end
