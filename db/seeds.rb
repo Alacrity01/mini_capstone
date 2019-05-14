@@ -23,3 +23,10 @@
 #   product.supplier_id = supplier_array.sample
 #   product.save
 # end
+
+products = Product.all
+
+products.each do |product| 
+  image = Image.new(url: product.image_url, product_id: product.id)
+  image.save
+end
