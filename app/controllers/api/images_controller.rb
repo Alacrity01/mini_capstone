@@ -1,4 +1,6 @@
 class Api::ImagesController < ApplicationController
+  before_action :authenticate_admin
+
   def create
     @image = Image.new(
                         product_id: @product.id,
