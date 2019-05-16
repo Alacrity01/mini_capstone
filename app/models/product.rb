@@ -19,7 +19,7 @@ class Product < ApplicationRecord
   #   Image.where(product_id: self.id)
   # end
 
-  #validates :image_url, 
+  has_many :orders
 
   def is_discounted?
     price < 60
