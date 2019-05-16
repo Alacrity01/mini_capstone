@@ -21,5 +21,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
-  
+  def authenticate_user
+    render json: [] unless current_user
+  end
 end
