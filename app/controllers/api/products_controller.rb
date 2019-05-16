@@ -24,7 +24,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def create
-    if current_user.admin?
+    if current_user && current_user.admin?
       @product = Product.new(
                             name: params[:name],
                             price: params[:price],
