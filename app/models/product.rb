@@ -20,6 +20,7 @@ class Product < ApplicationRecord
   # end
 
   has_many :orders
+  has_many :product_categories
 
   def is_discounted?
     price < 60
@@ -31,5 +32,9 @@ class Product < ApplicationRecord
 
   def total
     price + tax
+  end
+
+  def categories
+    self.product_categories.map { |product_category| product_category.category }
   end
 end
