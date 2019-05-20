@@ -10,9 +10,7 @@ class Api::ImagesController < ApplicationController
       render 'show.json.jbuilder'
     else
       render json: { errors: @image.errors.full_messages }, status: :unprocessable_entity
-    end@image.save
-
-    render "show.json.jbuilder"
+    end
   end
 
   def show
