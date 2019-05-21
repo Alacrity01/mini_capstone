@@ -5,9 +5,8 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :price, :numericality => { greater_than_or_equal_to: 0 }
   validates :price, :numericality => { less_than: 10000000 }
-
+  
   validates :description, presence: true
-  #validates :description, length: { in: 50..200 }
 
   belongs_to :supplier
   # def supplier

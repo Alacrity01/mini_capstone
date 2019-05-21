@@ -2,9 +2,10 @@ class Api::CartedProductsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @carted_products = current_user.carted_products
+    @carted_products = current_user.cart
+    
     render 'index.json.jbuilder'
-  end
+   end
 
   def create
     @carted_product = CartedProduct.new(

@@ -7,41 +7,32 @@ class Api::OrdersController < ApplicationController
   end
 
   def create
-    # product = Product.find(params[:product_id])
-    # calculated_subtotal = params[:quantity].to_i * product.price
-    # calculated_tax = calculated_subtotal * 0.09
-    # calulated_total = calculated_subtotal + calculated_tax
+    @order = Order.new(user_id: current_user.id)
 
-    # @order = Order.new(
-    #                   user_id: current_user.id,
-    #                   product_id: params[:product_id], 
-    #                   quantity: params[:quantity],
-    #                   )
+    carted_products = current_user.cart
+    @order.subtotal = @order.calculate_subtotal(current_user)
+    calculated_subtotal = 0
 
-    # @order.store_totals
-
-    carted_products = CartedProduct.all
-
-    carted_products.each do
-      if carted_product.status == "carted"
-
-        calculated_subtotal = carted_product.product.price * carted_product.quantity
-        calculated_tax = calculated_subtotal * 0.09
-        calculated_total = calculated_subtotal + calculated_tax
-
-        @order = Order.new(
-                           user_id: current_user.id,
-                           subtotal: calculated_subtotal,
-                           tax: calculated_tax,
-                           total: calculated_total
-                           )
-      end
+    carted_products.each do |carted_product|
+      calculated_subtotal += carted_product.subtotal
     end
 
-    if @order.save
-      render 'show.json.jbuilder'
-    else
-      render json: { errors: @order.errors.full_messages }, status: :unprocessable_entity
+    calculated_tax = calculated_subtotal * 0.09
+    calculated_total = calculated_subtotal + calculated_tax
+
+    @order = Order.new(
+                      user_id: current_user.id,
+                      subtotal: calculated_subtotal,
+                      tax: calculated_tax,
+                      total: calculated_total
+                      )
+
+    @order.save
+    carted_products.each do |carted_product|
+      carted_product.update(status: "purchased", order_id: @order.id)
     end
+
+    render 'show.json.jbuilder'
+
   end
 end
